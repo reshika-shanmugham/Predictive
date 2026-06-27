@@ -1948,6 +1948,16 @@ function renderSnapshotsList() {
         listEl.appendChild(item);
     });
 }
+// Helper to trigger MathJax typeset after DOM/layout updates settle
+function triggerMathJaxTypeset() {
+    if (window.MathJax && window.MathJax.typesetPromise) {
+        setTimeout(() => {
+            window.MathJax.typesetPromise().catch(err => {
+                console.warn('MathJax typeset error:', err);
+            });
+        }, 50);
+    }
+}
 
 function selectSnapshot(id) {
     const snap = snapshots.find(s => s.id === id);
@@ -1992,9 +2002,7 @@ function selectSnapshot(id) {
         `Output power: ${poutText} kW / Input power: ${(snap.outputPower + snap.totalLosses).toFixed(2)} kW &rarr; Efficiency: ${efficiencyText}%.`;
         
     // Run MathJax Typeset Smoothly
-    if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise();
-    }
+    triggerMathJaxTypeset();
 }
 
 function resetFormulaCardsToDefault() {
@@ -2009,9 +2017,7 @@ function resetFormulaCardsToDefault() {
     document.getElementById('trace-plosses-eval').textContent = "Select a historical snapshot to see evaluation.";
     document.getElementById('trace-peff-eval').textContent = "Select a historical snapshot to see evaluation.";
     
-    if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise();
-    }
+    triggerMathJaxTypeset();
 }
 
 if (btnExplanation && explanationPanel) {
