@@ -2018,6 +2018,7 @@ if (btnExplanation && explanationPanel) {
     btnExplanation.addEventListener('click', () => {
         isPaused = true; // Pause physics
         explanationPanel.classList.remove('hidden');
+        document.body.classList.add('modal-open'); // Lock background scrolling
         if (appContainer) appContainer.classList.add('phase-2-active');
         const dashboardLayout = document.getElementById('dashboard-layout');
         if (dashboardLayout) dashboardLayout.classList.add('phase-2-active');
@@ -2055,6 +2056,7 @@ if (btnExplanation && explanationPanel) {
 if (btnReturn && explanationPanel) {
     btnReturn.addEventListener('click', () => {
         explanationPanel.classList.add('hidden');
+        document.body.classList.remove('modal-open'); // Unlock background scrolling
         if (appContainer) appContainer.classList.remove('phase-2-active');
         const dashboardLayout = document.getElementById('dashboard-layout');
         if (dashboardLayout) dashboardLayout.classList.remove('phase-2-active');
