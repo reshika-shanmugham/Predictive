@@ -1437,12 +1437,17 @@ body.modal-open {
         align-items: flex-start;
         margin-bottom: 1rem !important;
     }
+
+    .explanation-title {
+        font-size: 0.95rem !important;
+    }
     
     .explanation-body {
         grid-template-columns: 1fr !important;
         gap: 1.5rem;
         height: auto !important;
         min-height: 0 !important;
+        flex: none !important;
     }
     
     .ledger-left-column {
